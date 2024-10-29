@@ -1,4 +1,3 @@
-// backend/routes/auth.js
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -7,10 +6,10 @@ const router = express.Router();
 
 // Signup Route
 router.post('/signup', async (req, res) => {
-    const { username, email, password } = req.body;
+    const { name, email, password } = req.body; 
     try {
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new User({ username, email, password: hashedPassword });
+        const newUser = new User({ name, email, password: hashedPassword });
         await newUser.save();
         res.status(201).json({ message: 'User registered successfully' });
     } catch (err) {

@@ -1,7 +1,6 @@
-// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Home from './home';
+import Home from './home'; // Corrected case
 import Login from './Login';
 import Signup from './Signup';
 

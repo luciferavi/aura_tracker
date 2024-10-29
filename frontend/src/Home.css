@@ -1,0 +1,60 @@
+/* src/Home.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #aebccb, #6d83f2);
+    color: #a43e3e;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    text-align: center;
+    padding: 2rem;
+    max-width: 600px;
+    color: rgb(201, 162, 104);
+    background-color: rgba(144, 83, 123, 0.1);
+    border-radius: 10px;
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: #c67171;
+}
+
+p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    color: #a95e5e;
+    background-color: rgb(238, 192, 136);
+}
+
+button {
+    background-color: #d74f1d;
+    color: #d65757;
+    font-size: 1rem;
+    padding: 0.8rem 1.2rem;
+    margin: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+button:hover {
+    background-color: #ff5733;
+    transform: translateY(-3px);
+}
+
+button:focus {
+    outline: none;
+}
+
+a {
+    text-decoration: none;
+}

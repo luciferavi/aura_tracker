@@ -1,10 +1,11 @@
 // src/Signup.js
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Signup.css';
 
 function Signup() {
     return (
-        <div>
+        <div className="container">
             <h2>Signup Page</h2>
             <form>
                 <div>

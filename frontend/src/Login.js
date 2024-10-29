@@ -1,10 +1,10 @@
-// src/Login.js
 import React from 'react';
 import { Link } from 'react-router-dom';
+import './Login.css';
 
 function Login() {
     return (
-        <div>
+        <div className="container">
             <h2>Login Page</h2>
             <form>
                 <div>

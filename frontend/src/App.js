@@ -4,6 +4,7 @@ import Home from './home'; // Corrected case
 import Login from './Login';
 import Signup from './Signup';
 import Arena from './arena';
+import Time_table from './timetable';
 function App() {
     return (
         <Router>
@@ -12,7 +13,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/arena" element={<Arena />} />
-
+                <Route path="/timetable" element={<Time_table/>}/>
             </Routes>
         </Router>
     );

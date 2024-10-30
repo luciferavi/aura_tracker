@@ -17,7 +17,7 @@ function Signup() {
         try {
             const response = await axios.post('http://localhost:5000/api/signup', { name, email, password });
             alert('Signup successful!');
-            navigate('/login'); // Redirect to login page after signup
+            navigate('/arena'); // Redirect to login page after signup
         } catch (error) {
             setError(error.response?.data?.message || 'Error creating account');
         }

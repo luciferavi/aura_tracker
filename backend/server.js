@@ -8,9 +8,13 @@ const authRoutes = require('./routes/auth'); // Adjust the import path if needed
 const app = express();
 app.use(cors());
 app.use(express.json());
+app.use('/uploads', express.static('uploads'));
+
 
 // Connect to MongoDB
 connectDB();
+
+
 
 // Use the auth routes
 app.use('/api', authRoutes);

@@ -37,7 +37,7 @@ function Timetable() {
                 }
             });
             if (response.data.photo) {
-                setPhotoPath(response.data.photo); // Set photo path from the user data
+                setPhotoPath(response.data.user.photo); // Set photo path from the user data
             }
         } catch (error) {
             console.error('Error fetching user data:', error);

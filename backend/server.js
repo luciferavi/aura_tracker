@@ -10,14 +10,17 @@ app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
-
+app.use('/api/auth', require('./routes/auth'));
+app.use('/api/courses', require('./routes/course'));
+app.use('/api/profile', require('./routes/profile'));
+app.use('/api/achievements', require('./routes/achievement'));
 // Connect to MongoDB
-connectDB();
 
 
 
 // Use the auth routes
 app.use('/api', authRoutes);
+connectDB();
 
 // Start the server
 const PORT = process.env.PORT || 5000;

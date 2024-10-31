@@ -1,17 +1,13 @@
-// components/Common/PrivateRoute.js
+// components/common/PrivateRoute.js
 import React from 'react';
-import { Route, Navigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+const PrivateRoute = ({ element, ...rest }) => {
     const isAuthenticated = !!localStorage.getItem('token');
-    return (
-        <Route
-            {...rest}
-            render={props =>
-                isAuthenticated ? <Component {...props} /> : <Navigate to="/" />
-            }
-        />
-    );
+
+    // If authenticated, render the passed Component; otherwise, redirect to login
+    return isAuthenticated ? element : <Navigate to="/login" replace />;
 };
 
 export default PrivateRoute;
+//in new version ,we have to return as a element 

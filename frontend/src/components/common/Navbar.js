@@ -1,13 +1,19 @@
 // components/Common/Navbar.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import { useNavigate } from 'react-router-dom';
+import Profile from '../Profile/Profile';
 const Navbar = () => {
-    const handleLogout = () => {
-        localStorage.removeItem('token');
-        window.location.reload();
-    };
+    const navigate = useNavigate();
 
+    // Logout handler
+    const handleLogout = () => {
+        // Remove the token from localStorage
+        localStorage.removeItem('token');
+        
+        // Redirect to the Home page
+        navigate('/');
+    };
     return (
         <nav>
             <ul>

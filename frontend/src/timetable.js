@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import Sidebar from './components/sidebar/sidebar';
 function Timetable() {
     const [file, setFile] = useState(null);
     const [photoPath, setPhotoPath] = useState('');
@@ -50,6 +50,8 @@ function Timetable() {
 
     return (
         <div>
+                              <Sidebar />
+
             <h1>Your Timetable</h1>
             {photoPath && (
                 <div>

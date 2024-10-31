@@ -1,19 +1,18 @@
 // src/Arena.js
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Navbar from './components/common/Navbar';
+import Sidebar from './components/sidebar/sidebar';
 function Arena() {
    
     return (
 
         <div>
-            <Navbar/>
+                  <Sidebar />
+
 
             <h1>Welcome to the Arena</h1>
             <p>This is your main page after login or signup.</p>
-            <Link to="/timetable">
-                <p>Go to Timetable</p>
-            </Link>    
+             
                 </div>
 
     );

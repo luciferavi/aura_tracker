@@ -1,78 +1,53 @@
-import React, { useEffect, useState } from 'react';
-import { useAuth } from '../../context/AuthContext';
-import axios from 'axios';
+// Profile.js
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import './Profile.css';
 
 const Profile = () => {
-    const { user } = useAuth(); // Get the user data from context
-    const [academicGoals, setAcademicGoals] = useState('');
-    const [progress, setProgress] = useState(0);
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        // Fetch the user's profile data (goals, progress, etc.) from your backend
-        const fetchProfileData = async () => {
-            try {
-                const response = await axios.get(`/api/profile/${user.userId}`);
-                setAcademicGoals(response.data.academicGoals);
-                setProgress(response.data.progress);
-            } catch (error) {
-                console.error("Error fetching profile data", error);
-            }
-        };
+  const user = {
+    name: "John Doe",
+    email: "johndoe@example.com",
+    progress: 75, 
+    profilePhoto: "C:\Users\aggra\OneDrive\Pictures\Screenshots 1\IMG20230414195936.jpg", // Replace with the actual path
+  };
 
-        if (user) {
-            fetchProfileData();
-        }
-    }, [user]);
+  return (
+    <div className="profile-container">
+      {/* User Photo and Basic Info */}
+      <div className="user-info">
+        <img src={user.profilePhoto} alt="User Photo" className="profile-photo" />
+        <h2>{user.name}</h2>
+        <p>{user.email}</p>
+      </div>
 
-    const handleGoalChange = (e) => {
-        setAcademicGoals(e.target.value);
-    };
-
-    const handleProgressChange = (e) => {
-        setProgress(e.target.value);
-    };
-
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            await axios.put(`/api/profile/${user.userId}`, {
-                academicGoals,
-                progress,
-            });
-            alert('Profile updated successfully!');
-        } catch (error) {
-            console.error("Error updating profile", error);
-        }
-    };
-
-    return (
-        <div className="profile-container">
-            <h1>Your Profile</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Academic Goals:</label>
-                    <textarea
-                        value={academicGoals}
-                        onChange={handleGoalChange}
-                        placeholder="Set your academic goals here"
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Progress (%):</label>
-                    <input
-                        type="number"
-                        value={progress}
-                        onChange={handleProgressChange}
-                        min="0"
-                        max="100"
-                        required
-                    />
-                </div>
-                <button type="submit">Update Profile</button>
-            </form>
+      {/* Progress Bar */}
+      <div className="progress-section">
+        <label>Progress:</label>
+        <div className="progress-bar">
+          <div className="progress" style={{ width: `${user.progress}%` }}></div>
         </div>
-    );
+        <span>{user.progress}%</span>
+      </div>
+
+      {/* Badges Section */}
+      <div className="badges-section">
+        <h3>Badges</h3>
+        <div className="badges">
+          {/* Display badges here; currently, badges are placeholders */}
+          <div className="badge">Badge 1</div>
+          <div className="badge">Badge 2</div>
+          <div className="badge">Badge 3</div>
+        </div>
+      </div>
+
+      {/* Set Academic Goals Button */}
+      <button className="set-goals-btn" onClick={() => navigate('/course')}>
+        Set Academic Goals
+      </button>
+    </div>
+  );
 };
 
 export default Profile;

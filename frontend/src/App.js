@@ -5,7 +5,7 @@ import Login from './Login';
 import Signup from './Signup';
 import Arena from './arena';
 import Timetable from './timetable';
-import Navbar from './components/common/Navbar';
+import Sidebar from './components/sidebar/sidebar';
 import Dashboard from './components/Dashboard/Dashboard';
 import CourseList from './components/Courses/CourseList';
 import CourseDetail from './components/Courses/CourseDetail';
@@ -26,7 +26,7 @@ function App() {
                 <Route path="/dashboard" element={<PrivateRoute component={Dashboard} />} />
                 <Route path="/courses" element={<PrivateRoute component={CourseList} />} />
                 <Route path="/courses/:id" element={<PrivateRoute component={CourseDetail} />} />
-                <Route path="/profile" element={<PrivateRoute component={Profile} />} />
+                <Route path="/profile" element={<PrivateRoute element={Profile} />} />
                 <Route path="/achievements" element={<PrivateRoute component={AchievementList} />} />
             </Routes>
         </Router>

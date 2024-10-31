@@ -1,0 +1,45 @@
+/* Sidebar.css */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: #333;
+    color: #fff;
+    padding-top: 20px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+  
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  
+  .toggle-icon {
+    position: absolute;
+    top: 20px;
+    right: -30px;
+    background-color: #333;
+    color: #fff;
+    padding: 5px;
+    cursor: pointer;
+    font-size: 24px;
+  }
+  
+  .menu button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background: none;
+    border: none;
+    color: #fff;
+    text-align: left;
+    cursor: pointer;
+    font-size: 18px;
+  }
+  
+  .menu button:hover {
+    background-color: #555;
+  }
+  

@@ -10,7 +10,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import CourseList from './components/Courses/CourseList';
 import CourseDetail from './components/Courses/CourseDetail';
 import Profile from './components/Profile/Profile';
-import AchievementList from './components/Achievements/AchievementList';
+import RewardsPage from './components/Achievements/rewards';
 import PrivateRoute from './components/common/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
 function App() {
@@ -26,8 +26,8 @@ function App() {
                 <Route path="/dashboard" element={<PrivateRoute component={Dashboard} />} />
                 <Route path="/courses" element={<PrivateRoute component={CourseList} />} />
                 <Route path="/courses/:id" element={<PrivateRoute component={CourseDetail} />} />
-                <Route path="/profile" element={<PrivateRoute element={Profile} />} />
-                <Route path="/achievements" element={<PrivateRoute component={AchievementList} />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/rewards" element={<RewardsPage />} />
             </Routes>
         </Router>
         </AuthProvider>

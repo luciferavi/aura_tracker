@@ -43,16 +43,3 @@
 .profile-button:hover {
     background-color: #e8ecf0;
 }
-
-/* Optional sidebar styling */
-.sidebar {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100vh;
-    width: 250px;
-    background-color: #ce5454;
-    box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
-    padding: 20px;
-    transition: transform 0.3s ease;
-}

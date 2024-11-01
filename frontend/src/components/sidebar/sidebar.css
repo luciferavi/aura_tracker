@@ -1,45 +1,28 @@
 /* Sidebar.css */
 .sidebar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 250px;
-    height: 100%;
-    background-color: #333;
-    color: #fff;
-    padding-top: 20px;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-  }
-  
-  .sidebar.open {
-    transform: translateX(0);
-  }
-  
-  .toggle-icon {
-    position: absolute;
-    top: 20px;
-    right: -30px;
-    background-color: #333;
-    color: #fff;
-    padding: 5px;
-    cursor: pointer;
-    font-size: 24px;
-  }
-  
-  .menu button {
-    display: block;
-    width: 100%;
-    padding: 15px;
-    background: none;
-    border: none;
-    color: #fff;
-    text-align: left;
-    cursor: pointer;
-    font-size: 18px;
-  }
-  
-  .menu button:hover {
-    background-color: #555;
-  }
-  
+  position: absolute;
+  top: 60px; /* Opens directly below navbar */
+  left: 0;
+  height: calc(100vh - 60px); /* Leaves room for navbar */
+  width: 250px;
+  background-color: #333;
+  color: white;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  z-index: 500;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar a {
+  display: block;
+  padding: 15px;
+  color: white;
+  text-decoration: none;
+}
+
+.sidebar a:hover {
+  background-color: #555;
+}

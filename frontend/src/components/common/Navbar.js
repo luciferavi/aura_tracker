@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import Profile from '../Profile/Profile';
+
 const Navbar = () => {
     const navigate = useNavigate();
 
@@ -14,15 +14,18 @@ const Navbar = () => {
         // Redirect to the Home page
         navigate('/');
     };
+
     return (
         <nav>
             <ul>
-                <li><Link to="/">Home</Link></li>
-                <li><Link to="/dashboard">Dashboard</Link></li>
-                <li><Link to="/courses">Courses</Link></li>
-                <li><Link to="/profile">Profile</Link></li>
-                <li><Link to="/achievements">Achievements</Link></li>
-                <li><button onClick={handleLogout}>Logout</button></li>
+            <li><a href="/profile">Profile</a></li>
+            
+                        <li><a href="/courses">Courses</a></li>
+                        <li><a href="/rewards">Rewards</a></li>
+                        <li><a href="/challenges">Challenges</a></li>
+                        <li><a href="/leaderboards">Leaderboards</a></li>
+                        <li><a href="/timetable">Timetable</a></li>
+                        <li><a href="/">Logout</a></li>
             </ul>
         </nav>
     );

@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './home'; 
+import { useState } from 'react';
 import Login from './Login';
 import Signup from './Signup';
 import Arena from './arena';
 import Timetable from './timetable';
-import Sidebar from './components/sidebar/sidebar';
 import Dashboard from './components/Dashboard/Dashboard';
 import CourseList from './components/Courses/CourseList';
 import CourseDetail from './components/Courses/CourseDetail';
@@ -14,9 +14,12 @@ import RewardsPage from './components/Achievements/rewards';
 import PrivateRoute from './components/common/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
 function App() {
+ 
+
     return (
 <AuthProvider>
         <Router>
+        
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />

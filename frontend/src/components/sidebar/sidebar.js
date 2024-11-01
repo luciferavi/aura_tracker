@@ -1,30 +1,30 @@
-// Sidebar.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './sidebar.css'; // Add styles for Sidebar here
+import './sidebar.css'; // Create a CSS file for styling the sidebar
+
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const navigate = useNavigate();
+    const [isOpen, setIsOpen] = useState(false);
 
-  const toggleSidebar = () => setIsOpen(!isOpen);
+    const toggleSidebar = () => {
+        setIsOpen(!isOpen);
+    };
 
-  return (
-    <div className={`sidebar ${isOpen ? 'open' : ''}`}>
-      <div className="toggle-icon" onClick={toggleSidebar}>
-        ⋮
-      </div>
-      {isOpen && (
-        <div className="menu">
-          <button onClick={() => navigate('/course')}>Course</button>
-          <button onClick={() => navigate('/rewards')}>Rewards</button>
-          <button onClick={() => navigate('/challenges')}>Challenges</button>
-          <button onClick={() => navigate('/leaderboard')}>Leaderboards</button>
-          <button onClick={() => navigate('/timetable')}>Timetable</button>
+    return (
+        <div>
+            <button className="sidebar-toggle" onClick={toggleSidebar}>•••</button>
+            {isOpen && (
+                <div className="sidebar">
+                    <ul>
+                        <li><a href="/profile">Profile</a></li>
+                        <li><a href="/courses">Courses</a></li>
+                        <li><a href="/rewards">Rewards</a></li>
+                        <li><a href="/challenges">Challenges</a></li>
+                        <li><a href="/leaderboards">Leaderboards</a></li>
+                        <li><a href="/timetable">Timetable</a></li>
+                    </ul>
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  );
+    );
 };
 
 export default Sidebar;
-//          <button onClick={() => navigate('/profile')}>Profile</button>

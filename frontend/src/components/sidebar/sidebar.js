@@ -15,7 +15,6 @@ const Sidebar = () => {
       </div>
       {isOpen && (
         <div className="menu">
-          <button onClick={() => navigate('/profile')}>Profile</button>
           <button onClick={() => navigate('/course')}>Course</button>
           <button onClick={() => navigate('/rewards')}>Rewards</button>
           <button onClick={() => navigate('/challenges')}>Challenges</button>
@@ -28,3 +27,4 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+//          <button onClick={() => navigate('/profile')}>Profile</button>

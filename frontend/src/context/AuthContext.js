@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
     // Function to handle user signup
     const signup = async (email, password, name) => {
         try {
-            const response = await axios.post('/api/auth/signup', { email, password, name });
+            const response = await axios.post('http://localhost:5000/api/auth/signup', { email, password, name });
             setCurrentUser(response.data.user); // Adjust based on your API response
             localStorage.setItem('user', JSON.stringify(response.data.user));
         } catch (error) {
@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
     // Function to handle user login
     const login = async (email, password) => {
         try {
-            const response = await axios.post('/api/auth/login', { email, password });
+            const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
             setCurrentUser(response.data.user);
             localStorage.setItem('user', JSON.stringify(response.data.user));
         } catch (error) {
@@ -43,23 +43,56 @@ export const AuthProvider = ({ children }) => {
     };
 
     // Check if user is already logged in on component mount
+    // useEffect(() => {
+    //     const checkUser = async () => {
+    //         const storedUser = localStorage.getItem('user');
+    //         if (storedUser) {
+    //             setCurrentUser(JSON.parse(storedUser));
+    //         } else {
+    //             try {
+    //                 const response = await axios.get('http://localhost:5000/api/profile/user');
+    //                 setCurrentUser(response.data.user);
+    //             } catch (error) {
+    //                 console.error("Error fetching user:", error);
+    //             }
+    //         }
+    //         setLoading(false);
+    //     };
+    //     checkUser();
+    // }, []);
     useEffect(() => {
         const checkUser = async () => {
             const storedUser = localStorage.getItem('user');
+            
             if (storedUser) {
                 setCurrentUser(JSON.parse(storedUser));
             } else {
                 try {
-                    const response = await axios.get('/api/auth/me');
-                    setCurrentUser(response.data.user);
+                    const token = localStorage.getItem('token'); // Get the token from localStorage
+                    const response = await axios.get('http://localhost:5000/api/user', {
+                        headers: {
+                            Authorization: `Bearer ${token}` // Include token in headers
+                        }
+                    });
+                    setCurrentUser(response.data);
                 } catch (error) {
-                    console.error("Error fetching user:", error);
+                    if (error.response && error.response.status === 401) {
+                        console.error("Unauthorized: Please log in again.");
+                        // Redirect to login page or handle unauthorized case
+                    } else {
+                        console.error("Error fetching user:", error);
+                    }
                 }
             }
+            
             setLoading(false);
         };
+        
         checkUser();
     }, []);
+    
+
+
 
     // Providing user data and auth functions
     const value = {

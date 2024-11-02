@@ -1,53 +1,46 @@
-// Profile.js
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import './Profile.css';
+// components/Profile/Profile.js
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const Profile = () => {
-  const navigate = useNavigate();
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+//change get->fetch
+    useEffect(() => {
+        const fetchUserProfile = async () => {
+            try {
+                const token = localStorage.getItem('token');
+                const response = await axios.fetch('http://localhost:5000/api/user', {
+                    headers: { Authorization: `Bearer ${token}` }
+                });
+                setUser(response.data);
+            } catch (err) {
+                setError('Failed to load user profile');
+            } finally {
+                setLoading(false);
+            }
+        };
 
-  const user = {
-    name: "John Doe",
-    email: "johndoe@example.com",
-    progress: 75, 
-    profilePhoto: "C:\Users\aggra\OneDrive\Pictures\Screenshots 1\IMG20230414195936.jpg", // Replace with the actual path
-  };
+        fetchUserProfile();
+    }, []);
 
-  return (
-    <div className="profile-container">
-      {/* User Photo and Basic Info */}
-      <div className="user-info">
-        <img src={user.profilePhoto} alt="User Photo" className="profile-photo" />
-        <h2>{user.name}</h2>
-        <p>{user.email}</p>
-      </div>
+    if (loading) return <div>Loading...</div>;
+    if (error) return <div>{error}</div>;
 
-      {/* Progress Bar */}
-      <div className="progress-section">
-        <label>Progress:</label>
-        <div className="progress-bar">
-          <div className="progress" style={{ width: `${user.progress}%` }}></div>
+    return (
+        <div>
+            <h1>User Profile</h1>
+            {user && (
+                <div>
+                    <img src={user.photo} alt="Profile" />
+                    <h2>{user.name}</h2>
+                    <p>Email: {user.email}</p>
+                    {/* Display additional user info */}
+                </div>
+            )}
         </div>
-        <span>{user.progress}%</span>
-      </div>
-
-      {/* Badges Section */}
-      <div className="badges-section">
-        <h3>Badges</h3>
-        <div className="badges">
-          {/* Display badges here; currently, badges are placeholders */}
-          <div className="badge">Badge 1</div>
-          <div className="badge">Badge 2</div>
-          <div className="badge">Badge 3</div>
-        </div>
-      </div>
-
-      {/* Set Academic Goals Button */}
-      <button className="set-goals-btn" onClick={() => navigate('/course')}>
-        Set Academic Goals
-      </button>
-    </div>
-  );
+    );
 };
 
 export default Profile;

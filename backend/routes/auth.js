@@ -91,15 +91,19 @@ router.post('/login', async (req, res) => {
 router.get('/user', authenticateToken, async (req, res) => {
     try {
         const userId = req.user.userId;
-        const user = await User.findById(userId).select('photo name email'); // Select additional fields if necessary
+        const user = await User.findById(userId).select('photo name email'); // Adjust fields as needed
+
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
-        res.json(user); // Send the user data directly
+
+        res.json({ user }); // Wrap user data in an object for more predictable structure
     } catch (err) {
+        console.error('Error retrieving user data:', err); // Log the error for debugging
         res.status(500).json({ error: 'Failed to retrieve user data' });
     }
 });
+
 
 
 

@@ -29,7 +29,7 @@ function App() {
                 <Route path="/dashboard" element={<PrivateRoute component={Dashboard} />} />
                 <Route path="/courses" element={<PrivateRoute component={CourseList} />} />
                 <Route path="/courses/:id" element={<PrivateRoute component={CourseDetail} />} />
-                <Route path="/profile" element={<Profile />} />
+                <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
                 <Route path="/rewards" element={<RewardsPage />} />
             </Routes>
         </Router>

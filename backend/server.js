@@ -4,13 +4,13 @@ const mongoose = require('mongoose');
 const cors = require('cors'); // Import cors
 const connectDB = require('./config/db'); // Correct path to db.js
 const authRoutes = require('./routes/auth'); // Adjust the import path if needed
-
+const profileRoutes=require('./routes/profile');
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
-app.use('/api/auth', require('./routes/auth'));
+//app.use('/api/auth', require('./routes/auth'));
 app.use('/api/courses', require('./routes/course'));
 app.use('/api/profile', require('./routes/profile'));
 app.use('/api/achievements', require('./routes/achievement'));

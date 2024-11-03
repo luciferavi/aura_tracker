@@ -5,7 +5,7 @@ import { useState } from 'react';
 import Login from './Login';
 import Signup from './Signup';
 import Arena from './arena';
-import Timetable from './timetable';
+//import Timetable from './timetable';
 import Dashboard from './components/Dashboard/Dashboard';
 import CourseList from './components/Courses/CourseList';
 import CourseDetail from './components/Courses/CourseDetail';
@@ -13,6 +13,8 @@ import Profile from './components/Profile/Profile';
 import RewardsPage from './components/Achievements/rewards';
 import PrivateRoute from './components/common/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
+import Timetable from './timetable';
+import Calendar from './components/Calender';
 function App() {
  
 
@@ -25,7 +27,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/arena" element={<Arena />} />
-                <Route path="/timetable" element={<PrivateRoute element ={<Timetable />}/>} />
+                <Route path="/Calender" element={<PrivateRoute element ={<Calendar />}/>} />
                 <Route path="/dashboard" element={<PrivateRoute component={Dashboard} />} />
                 <Route path="/courses" element={<PrivateRoute component={CourseList} />} />
                 <Route path="/courses/:id" element={<PrivateRoute component={CourseDetail} />} />

@@ -24,7 +24,7 @@ const Navbar = () => {
                         <li><a href="/rewards">Rewards</a></li>
                         <li><a href="/challenges">Challenges</a></li>
                         <li><a href="/leaderboards">Leaderboards</a></li>
-                        <li><a href="/timetable">Timetable</a></li>
+                        <li><a href="/Calender">Calendar</a></li>
                         <li><a href="/">Logout</a></li>
             </ul>
         </nav>

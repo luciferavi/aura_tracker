@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Sidebar from './components/sidebar/sidebar';
+import Calendar from './components/Calender';
 function Timetable() {
     const [file, setFile] = useState(null);
     const [photoPath, setPhotoPath] = useState('');
@@ -52,17 +53,8 @@ function Timetable() {
         <div>
 
             <h1>Your Timetable</h1>
-            {photoPath && (
-                <div>
-                    <h2>Your Photo:</h2>
-                    <img src={`http://localhost:8000/${photoPath}`} alt="User" style={{ maxWidth: '300px', maxHeight: '300px' }} />
-                </div>
-            )}
-            <form onSubmit={handleUpload}>
-                <label>Upload your photo:</label>
-                <input type="file" onChange={handleFileChange} />
-                <button type="submit">Upload</button>
-            </form>
+            <div><Calendar/></div>
+            
         </div>
     );
 }

@@ -7,7 +7,7 @@ const router = express.Router();
 const multer = require('multer');
 const path=require('path');
 const authenticateToken = require('../middleware/authMiddleware'); // Import the auth middleware
-
+const Timetable=require('../models/Timetable');
 // Define the storage configuration for multer
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -105,6 +105,30 @@ router.get('/user', authenticateToken, async (req, res) => {
     }
 });
 
+
+
+
+
+
+router.post('/timetable', async (req, res) => {
+    try {
+        const { title, start, end } = req.body;
+        const newEvent = new Timetable({ title, start, end });
+        await newEvent.save();
+        res.status(201).json({ message: 'Event saved successfully' });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to save event' });
+    }
+});
+
+router.get('/timetable', async (req, res) => {
+    try {
+        const events = await Timetable.find({});
+        res.json({ events });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch events' });
+    }
+});
 
 
 //module.exports=upload;

@@ -14,7 +14,7 @@ function Login() {
         setError('');
 
         try {
-            const response = await axios.post('http://localhost:5000/api/login', { email, password });
+            const response = await axios.post('http://localhost:8000/api/login', { email, password });
             localStorage.setItem('token', response.data.token); // Save token in local storage
             alert('Login successful!');
             navigate('/arena'); // Redirect to user profile

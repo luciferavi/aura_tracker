@@ -1,18 +1,22 @@
-node_modules/
 # Node modules
 node_modules/
 
 # Logs
 logs
 *.log
+npm-debug.log*
 
-# Environment variables
+# Environment files
+.env
 
-
-# Build directories
+# Build output
 dist/
 build/
 
-# Other temporary files
+# OS specific files
 .DS_Store
 Thumbs.db
+
+# IDE specific files
+.vscode/
+.idea/

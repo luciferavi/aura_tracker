@@ -15,7 +15,7 @@ function Timetable() {
         formData.append('photo', file);
 
         try {
-            const response = await axios.post('http://localhost:5000/api/upload-photo', formData, {
+            const response = await axios.post('http://localhost:8000/api/upload-photo', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -31,7 +31,7 @@ function Timetable() {
 
     const fetchUserData = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/user', {
+            const response = await axios.get('http://localhost:8000/api/user', {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }

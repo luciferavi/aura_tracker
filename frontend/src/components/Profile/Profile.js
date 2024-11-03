@@ -11,10 +11,12 @@ const Profile = () => {
         const fetchUserProfile = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await axios.fetch('http://localhost:5000/api/user', {
+                // console.log(token)
+                const response = await axios.get('http://localhost:8000/api/user', {
                     headers: { Authorization: `Bearer ${token}` }
                 });
-                setUser(response.data);
+                console.log(response.data)
+                setUser(response.data.user);
             } catch (err) {
                 setError('Failed to load user profile');
             } finally {

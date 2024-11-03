@@ -18,7 +18,7 @@ function Signup() {
 
         try {
             // API request to register the user
-            const response = await axios.post('http://localhost:5000/api/signup', { name, email, password });
+            const response = await axios.post('http://localhost:8000/api/signup', { name, email, password });
             alert('Signup successful!');
             
             // Log in the user after signup

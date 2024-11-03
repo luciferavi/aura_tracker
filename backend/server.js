@@ -22,7 +22,7 @@ app.use('/api/timetable', timetableRoutes); // Add the timetable route
 
 
 // Use the auth routes
-app.use('/api', authRoutes);
+app.use('/api/auth', authRoutes);
 connectDB();
 
 // Start the server

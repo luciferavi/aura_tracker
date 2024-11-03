@@ -8,6 +8,11 @@ const multer = require('multer');
 const path=require('path');
 const authenticateToken = require('../middleware/authMiddleware'); // Import the auth middleware
 const Timetable=require('../models/Timetable');
+const { OAuth2Client } = require('google-auth-library');
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID); // Make sure this is defined in your .env file
+
+
+
 // Define the storage configuration for multer
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -19,6 +24,36 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({ storage: storage });
+
+
+
+
+router.post('/google-login', async (req, res) => {
+    const { token } = req.body;
+
+    try {
+        // Verify Google token
+        const ticket = await client.verifyIdToken({
+            idToken: token,
+            audience: process.env.GOOGLE_CLIENT_ID,
+        });
+        const { name, email, picture } = ticket.getPayload();
+
+        // Check if user exists or create a new user
+        let user = await User.findOne({ email });
+        if (!user) {
+            user = new User({ name, email, photo: picture });
+            await user.save();
+        }
+
+        // Generate a JWT token for the user
+        const jwtToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.json({ message: 'Google login successful', token: jwtToken });
+    } catch (error) {
+        console.error('Google login error:', error);
+        res.status(500).json({ error: 'Failed to log in with Google' });
+    }
+});
 
 // Route to upload a photo
 router.post('/upload-photo', authenticateToken, upload.single('photo'), async (req, res) => {

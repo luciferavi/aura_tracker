@@ -36,7 +36,7 @@ function Timetable() {
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
             });
-            if (response.data.photo) {
+            if (response.data.user.photo) {
                 setPhotoPath(response.data.user.photo); // Set photo path from the user data
             }
         } catch (error) {
@@ -50,13 +50,12 @@ function Timetable() {
 
     return (
         <div>
-                              <Sidebar />
 
             <h1>Your Timetable</h1>
             {photoPath && (
                 <div>
                     <h2>Your Photo:</h2>
-                    <img src={`http://localhost:8000/${photoPath}`} alt="User" style={{ maxWidth: '200px', maxHeight: '200px' }} />
+                    <img src={`http://localhost:8000/${photoPath}`} alt="User" style={{ maxWidth: '300px', maxHeight: '300px' }} />
                 </div>
             )}
             <form onSubmit={handleUpload}>
@@ -69,3 +68,8 @@ function Timetable() {
 }
 
 export default Timetable;
+
+
+
+//netstat -aon | findstr :8000
+//taskkill /PID 26804 /F

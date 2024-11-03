@@ -22,7 +22,7 @@ function Signup() {
             alert('Signup successful!');
             
             // Log in the user after signup
-            await login(email, password);
+            //await login(email, password);
             navigate('/arena'); // Redirect to arena page
         } catch (error) {
             setError(error.response?.data?.message || 'Error creating account');

@@ -25,7 +25,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/arena" element={<Arena />} />
-                <Route path="/timetable" element={<Timetable />} />
+                <Route path="/timetable" element={<PrivateRoute element ={<Timetable />}/>} />
                 <Route path="/dashboard" element={<PrivateRoute component={Dashboard} />} />
                 <Route path="/courses" element={<PrivateRoute component={CourseList} />} />
                 <Route path="/courses/:id" element={<PrivateRoute component={CourseDetail} />} />

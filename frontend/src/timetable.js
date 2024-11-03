@@ -56,7 +56,7 @@ function Timetable() {
             {photoPath && (
                 <div>
                     <h2>Your Photo:</h2>
-                    <img src={`http://localhost:5000/${photoPath}`} alt="User" style={{ maxWidth: '200px', maxHeight: '200px' }} />
+                    <img src={`http://localhost:8000/${photoPath}`} alt="User" style={{ maxWidth: '200px', maxHeight: '200px' }} />
                 </div>
             )}
             <form onSubmit={handleUpload}>

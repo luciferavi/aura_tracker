@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const router = express.Router();
 const multer = require('multer');
+const path=require('path');
 const authenticateToken = require('../middleware/authMiddleware'); // Import the auth middleware
 
 // Define the storage configuration for multer
@@ -106,5 +107,5 @@ router.get('/user', authenticateToken, async (req, res) => {
 
 
 
-
+//module.exports=upload;
 module.exports = router;

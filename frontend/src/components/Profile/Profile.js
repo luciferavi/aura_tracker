@@ -15,7 +15,7 @@ const Profile = () => {
                 const response = await axios.get('http://localhost:8000/api/user', {
                     headers: { Authorization: `Bearer ${token}` }
                 });
-                console.log(response.data)
+               //just to check = console.log(response.data.user)
                 setUser(response.data.user);
             } catch (err) {
                 setError('Failed to load user profile');

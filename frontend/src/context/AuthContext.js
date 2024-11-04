@@ -20,6 +20,8 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem('user', JSON.stringify(response.data.user));
         } catch (error) {
             console.error("Signup error:", error);
+            localStorage.setItem('token', token);  // Save token in localStorage
+
             throw error; // Throw to handle in the component
         }
     };
@@ -30,6 +32,8 @@ export const AuthProvider = ({ children }) => {
             const response = await axios.post('http://localhost:8000/api/auth/login', { email, password });
             setCurrentUser(response.data.user);
             localStorage.setItem('user', JSON.stringify(response.data.user));
+            localStorage.setItem('token', token);  // Save token in localStorage
+
         } catch (error) {
             console.error("Login error:", error);
             throw error;
@@ -40,6 +44,8 @@ export const AuthProvider = ({ children }) => {
     const logout = () => {
         setCurrentUser(null);
         localStorage.removeItem('user');
+        localStorage.removeItem('token');
+
     };
 
     // Check if user is already logged in on component mount

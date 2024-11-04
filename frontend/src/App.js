@@ -34,7 +34,7 @@ function App() {
                 <Route path="/courses/:id" element={<PrivateRoute component={CourseDetail} />} />
                 <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
                 <Route path="/rewards" element={<RewardsPage />} />
-                <Route path="/tasks" element={<TaskManager />} />
+                <Route path="/tasks" element={<PrivateRoute element={<TaskManager />}/>} />
 
             </Routes>
         </Router>

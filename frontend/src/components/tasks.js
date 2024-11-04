@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const TaskManager = () => {
+  
   const [tasks, setTasks] = useState([]);
   const [taskInput, setTaskInput] = useState('');
-  const token = localStorage.getItem('jwtToken'); // Assuming you store the token here
+  const token = localStorage.getItem('token'); // Assuming you store the token here
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -33,6 +34,8 @@ const TaskManager = () => {
           },
         }
       );
+     // console.log('Response data:', response.data); 
+
       setTasks([...tasks, response.data]);
       setTaskInput('');
     } catch (error) {

@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
     // Function to handle user signup
     const signup = async (email, password, name) => {
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/signup', { email, password, name });
+            const response = await axios.post('http://localhost:8000/api/auth/signup', { email, password, name });
             setCurrentUser(response.data.user); // Adjust based on your API response
             localStorage.setItem('user', JSON.stringify(response.data.user));
         } catch (error) {
@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
     // Function to handle user login
     const login = async (email, password) => {
         try {
-            const response = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+            const response = await axios.post('http://localhost:8000/api/auth/login', { email, password });
             setCurrentUser(response.data.user);
             localStorage.setItem('user', JSON.stringify(response.data.user));
         } catch (error) {

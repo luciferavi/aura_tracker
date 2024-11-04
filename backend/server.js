@@ -6,11 +6,13 @@ const connectDB = require('./config/db'); // Correct path to db.js
 const authRoutes = require('./routes/auth'); // Adjust the import path if needed
 const profileRoutes=require('./routes/profile');
 const timetableRoutes = require('./routes/timetable'); // Import the timetable route
+const taskRoutes = require('./routes/tasks');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
+app.use('/api/tasks', taskRoutes);
 
 //app.use('/api/auth', require('./routes/auth'));
 app.use('/api/courses', require('./routes/course'));

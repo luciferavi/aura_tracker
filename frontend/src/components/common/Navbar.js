@@ -25,6 +25,7 @@ const Navbar = () => {
                         <li><a href="/challenges">Challenges</a></li>
                         <li><a href="/leaderboards">Leaderboards</a></li>
                         <li><a href="/Calender">Calendar</a></li>
+                        <li><a href='/tasks'>task</a></li>
                         <li><a href="/">Logout</a></li>
             </ul>
         </nav>

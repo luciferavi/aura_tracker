@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 import axios from 'axios';
-//import {auth,provider} from '../src/firebase';
-//import { signInWithPopup } from 'firebase/auth';
+import {auth,provider} from '../src/firebase';
+import {signInWithPopup} from 'firebase/auth';
 
 function Login() {
     const [email, setEmail] = useState('');
@@ -25,25 +25,24 @@ function Login() {
         }
     };
 
- //  const handleGoogleSignIn = async () => {
-   //    try {
-     //      const result = await signInWithPopup(auth, provider);
-       //    const user = result.user;
-//
-  //         // Optional: Send the user’s Google token to your backend if needed
-    //       const token = await user.getIdToken();
-      //     const response = await axios.post('http://localhost:8000/api/google-login', { token });
+   const handleGoogleSignIn = async () => {
+      try {
+           const result = await signInWithPopup(auth, provider);
+           const user = result.user;
 
-        //   localStorage.setItem('token', response.data.token); // Save token in local storage
-          // alert('Google login successful!');
+           // Optional: Send the user’s Google token to your backend if needed
+           const token = await user.getIdToken();
+           const response = await axios.post('http://localhost:8000/api/google-login', { token });
+
+           localStorage.setItem('token', response.data.token); // Save token in local storage
+           alert('Google login successful!');
            //navigate('/arena'); // Redirect to arena or other authenticated page
-       //} catch (error) {
-        //   console.error('Google login error:', error);
-         //  setError('Google login failed. Please try again.');
-       //}
-   //};
+       } catch (error) {
+           console.error('Google login error:', error);
+           setError('Google login failed. Please try again.');
+       }
+   };
 
-//            <button onClick={handleGoogleSignIn} className="google-signin-button">Login with Google</button>
 
     return (
         <div className="container">
@@ -60,6 +59,7 @@ function Login() {
                 </div>
                 <button type="submit">Login</button>
             </form>
+            <button onClick={handleGoogleSignIn} className="google-signin-button">Login with Google</button>
 
             <p>
                 Don't have an account? <Link to="/signup">Sign Up</Link>

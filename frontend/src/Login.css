@@ -1,83 +1,157 @@
-/* src/Login.css */
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
 
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f3f4f6;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-.container {
+    justify-content: center;
     width: 100%;
-    max-width: 400px;
-    padding: 2rem;
-    background-color: #cbbbbb;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    min-height: 100vh;
+    color: #ffffff;
+}
+
+/* Container Styling */
+.container {
     text-align: center;
+    background: rgba(255, 255, 255, 0.15);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+    width: 100%;
+    color: #ffffff;
 }
 
-h2 {
-    font-size: 1.8rem;
-    color: #333;
-    margin-bottom: 1.5rem;
+/* Heading */
+.container h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
 
+/* Form Styling */
 form {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    gap: 15px; /* Adds space between form elements */
+}
+
+form div {
+    width: 100%;
 }
 
 label {
-    font-size: 0.9rem;
-    color: #666;
-    margin-bottom: 0.5rem;
+    display: block;
+    font-size: 1rem;
+    margin-bottom: 5px;
+    color: #ffffff;
 }
 
 input {
-    padding: 0.8rem;
-    margin-bottom: 1.2rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
     font-size: 1rem;
-    transition: border-color 0.3s;
-}
-
-input:focus {
-    border-color: #0077ff;
     outline: none;
+    color: #333;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
 }
 
-button {
-    padding: 0.8rem;
-    background-color: #729ccb;
-    color: white;
-    border: #333;
-    border-color: #333;
-    border-radius: 4px;
+/* Button Styling */
+button, .google-signin-button {
+    background: #ff7e5f;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
     font-size: 1rem;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 250px;
+    margin-top: 15px;
 }
 
-button:hover {
-    background-color: #005bb5;
+button:hover, .google-signin-button:hover {
+    background: #feb47b;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-p {
-    margin-top: 1rem;
+/* Google Sign-In Button Styling */
+.google-signin-button {
+    background-color: #db4437; /* Google red */
+}
+
+.google-signin-button:hover {
+    background-color: #c23321;
+}
+
+/* Error Message Styling */
+.error {
+    color: #ffdddd;
+    background-color: rgba(255, 0, 0, 0.1);
+    padding: 8px;
+    border-radius: 8px;
+    margin-bottom: 15px;
     font-size: 0.9rem;
+}
+
+/* Links */
+.container p {
+    font-size: 0.9rem;
+    margin-top: 15px;
+    color: #ffffff;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.container a {
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.container a:hover {
+    color: #feb47b;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container h2 {
+        font-size: 1.8rem;
+    }
+
+    .container p {
+        font-size: 0.9rem;
+    }
+
+    button, .google-signin-button {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+}
+.password-field {
+    position: relative;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 10px;
+    top: 40px; /* Adjust as needed based on input field height */
+    cursor: pointer;
     color: #666;
 }
-
-a {
-    color: #0077ff;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
+.eye-icon:hover {
+    color: #333;
 }

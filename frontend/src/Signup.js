@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Signup.css';
 import axios from 'axios';
-import { useAuth } from './context/AuthContext';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
 function Signup() {
-    const { login } = useAuth();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
@@ -26,7 +25,6 @@ function Signup() {
         }
     };
 
-    // Function for Google Signup
     const handleGoogleSignup = async () => {
         const auth = getAuth();
         const provider = new GoogleAuthProvider();
@@ -35,7 +33,6 @@ function Signup() {
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
 
-            // Send user data to the backend if needed
             await axios.post('http://localhost:8000/api/google-signup', {
                 name: user.displayName,
                 email: user.email,
@@ -46,6 +43,10 @@ function Signup() {
         } catch (error) {
             setError('Google Signup failed. Please try again.');
         }
+    };
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
     };
 
     return (
@@ -71,14 +72,19 @@ function Signup() {
                         required
                     />
                 </div>
-                <div>
+                <div className="password-field">
                     <label>Password:</label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
+                    <div className="input-container">
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                        <span onClick={togglePasswordVisibility} className="eye-icon">
+                            {showPassword ? <i className="fas fa-eye-slash"></i> : <i className="fas fa-eye"></i>}
+                        </span>
+                    </div>
                 </div>
                 <button type="submit">Sign Up</button>
             </form>

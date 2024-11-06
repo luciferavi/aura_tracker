@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 
 // CourseForm component to add new courses
@@ -34,17 +34,27 @@ const CourseForm = ({ addCourse }) => {
 
 // Main CoursesPage component
 const CoursesPage = () => {
-  const [courses, setCourses] = useState([]);
+  const [courses, setCourses] = useState([]); 
+  const [loading, setLoading] = useState(false); 
 
   // Fetch courses from the backend when the component mounts
-  const fetchCourses = async () => {
+  const fetchCourses = useCallback(async () => {
+    if (loading) return; // Avoid multiple fetches simultaneously
+    setLoading(true);
     try {
       const response = await axios.get('http://localhost:8000/api/courses');
-      setCourses(response.data); // Assign fetched courses to state
+      setCourses(response.data); // Set courses directly without pagination
     } catch (error) {
       console.error('Error fetching courses:', error);
+    } finally {
+      setLoading(false);
     }
-  };
+  }, [loading]);
+
+  // Trigger fetchCourses when the page mounts
+  useEffect(() => {
+    fetchCourses();
+  }, [fetchCourses]);
 
   // Add a new course
   const addCourse = async (courseData) => {
@@ -76,29 +86,43 @@ const CoursesPage = () => {
     }
   };
 
-  useEffect(() => {
-    fetchCourses();
-  }, []);
-
   return (
     <div>
       <h1>Courses</h1>
       <CourseForm addCourse={addCourse} />
+
       {courses.map(course => (
         <div key={course._id}>
           <h2>{course.name}</h2>
           <p>{course.description}</p>
           <h3>Assignments</h3>
-          {course.assignments?.map(assignment => (
-            <div key={assignment._id}>
-              <span>{assignment.title} - Due: {new Date(assignment.deadline).toLocaleDateString()}</span>
-              <input
-                type="checkbox"
-                checked={assignment.completed}
-                onChange={() => updateAssignmentStatus(course._id, assignment._id, !assignment.completed)}
-              />
-            </div>
-          ))}
+          
+          {/* Table for displaying assignments */}
+          <table>
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Deadline</th>
+                <th>Completed</th>
+              </tr>
+            </thead>
+            <tbody>
+              {course.assignments?.map(assignment => (
+                <tr key={assignment._id}>
+                  <td>{assignment.title}</td>
+                  <td>{new Date(assignment.deadline).toLocaleDateString()}</td>
+                  <td>
+                    <input
+                      type="checkbox"
+                      checked={assignment.completed}
+                      onChange={() => updateAssignmentStatus(course._id, assignment._id, !assignment.completed)}
+                    />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
           {/* Form to add assignments */}
           <form onSubmit={(e) => {
             e.preventDefault();
@@ -113,6 +137,8 @@ const CoursesPage = () => {
           </form>
         </div>
       ))}
+
+      {loading && <p>Loading courses...</p>} {/* Show loading indicator */}
     </div>
   );
 };

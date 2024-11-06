@@ -1,42 +1,118 @@
 /* Navbar.css */
-.navbar {
-    height: 60px;
-    width: 100%;
-    background-color: #333;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
+
+/* Sidebar Styles */
+.sidebar {
     position: fixed;
     top: 0;
+    left: -250px; /* Initially off-screen */
+    width: 250px;
+    height: 100%;
+    background-color: #2c3e50;
+    color: #fff;
+    padding-top: 60px;
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+.sidebar.open {
+    left: 0; /* Bring sidebar into view when opened */
+}
+
+.sidebar-header {
+    padding: 10px;
+    font-size: 24px;
+    text-align: center;
+    border-bottom: 1px solid #34495e;
+}
+
+.sidebar-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar-list li {
+    padding: 15px 20px;
+    font-size: 18px;
+    border-bottom: 1px solid #34495e;
+}
+
+.sidebar-list li a {
+    text-decoration: none;
+    color: #ecf0f1;
+    display: block;
+}
+
+.sidebar-list li:hover {
+    background-color: #34495e;
+}
+
+.sidebar-list li a:hover {
+    color: #f39c12; /* Highlight color */
+}
+
+/* Sidebar Toggle Button */
+.sidebar-toggle {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
     z-index: 1000;
 }
 
-.toggle-btn {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
+.hamburger-icon {
+    width: 30px;
+    height: 3px;
+    background-color: #ecf0f1;
+    position: relative;
+    transition: transform 0.3s ease;
 }
 
-.navbar-title {
-    flex: 1;
-    text-align: center;
-    font-size: 20px;
+.hamburger-icon::before,
+.hamburger-icon::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 3px;
+    background-color: #ecf0f1;
+    transition: transform 0.3s ease;
 }
 
-.nav-right {
-    display: flex;
-    gap: 10px;
+.hamburger-icon::before {
+    top: -10px;
 }
 
-.nav-link,
-.nav-button {
-    color: white;
-    text-decoration: none;
-    background: none;
-    border: none;
-    cursor: pointer;
+.hamburger-icon::after {
+    top: 10px;
+}
+
+/* When the sidebar is open, change the hamburger icon to 'X' */
+.sidebar.open ~ .sidebar-toggle .hamburger-icon {
+    transform: rotate(45deg);
+}
+
+.sidebar.open ~ .sidebar-toggle .hamburger-icon::before {
+    transform: rotate(90deg);
+    top: 0;
+}
+
+.sidebar.open ~ .sidebar-toggle .hamburger-icon::after {
+    transform: rotate(90deg);
+    top: 0;
+}
+
+/* Responsive Styles for Smaller Screens */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px; /* Adjust width for small screens */
+    }
+    
+    .sidebar-header {
+        font-size: 20px;
+    }
+
+    .sidebar-list li {
+        font-size: 16px;
+    }
 }

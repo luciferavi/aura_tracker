@@ -5,6 +5,8 @@ import { useState } from 'react';
 import Login from './Login';
 import Signup from './Signup';
 import Arena from './arena';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+
 //import Timetable from './timetable';
 import Dashboard from './components/Dashboard/Dashboard';
 import CourseForm from './components/Courses/CourseForm';

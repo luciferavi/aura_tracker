@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 import axios from 'axios';
-import {auth,provider} from '../src/firebase';
-import {signInWithPopup} from 'firebase/auth';
+import { auth, provider } from '../src/firebase';
+import { signInWithPopup } from 'firebase/auth';
 
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
     const navigate = useNavigate();
 
@@ -25,27 +26,28 @@ function Login() {
         }
     };
 
-   const handleGoogleSignIn = async () => {
-      try {
-           const result = await signInWithPopup(auth, provider);
-           const user = result.user;
+    const handleGoogleSignIn = async () => {
+        try {
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
 
-           // Optional: Send the user’s Google token to your backend if needed
-           const token = await user.getIdToken();
-           console.log('Firebase ID Token:', token); // Check if token is correctly retrieved
+            const token = await user.getIdToken();
+            console.log('Firebase ID Token:', token);
 
-           const response = await axios.post('http://localhost:8000/api/google-login', { token });
+            const response = await axios.post('http://localhost:8000/api/google-login', { token });
 
-           localStorage.setItem('token', response.data.token); // Save token in local storage
-           alert('Google login successful!');
-           //navigate('/arena'); // Redirect to arena or other authenticated page
-           navigate('/arena');
-       } catch (error) {
-           console.error('Google login error:', error);
-           setError('Google login failed. Please try again.');
-       }
-   };
+            localStorage.setItem('token', response.data.token); // Save token in local storage
+            alert('Google login successful!');
+            navigate('/arena');
+        } catch (error) {
+            console.error('Google login error:', error);
+            setError('Google login failed. Please try again.');
+        }
+    };
 
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
 
     return (
         <div className="container">
@@ -56,9 +58,19 @@ function Login() {
                     <label>Email:</label>
                     <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
                 </div>
-                <div>
+                <div className="password-field">
                     <label>Password:</label>
-                    <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+                    <div className="input-container">
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                        <span onClick={togglePasswordVisibility} className="eye-icon">
+                            {showPassword ? <i className="fas fa-eye-slash"></i> : <i className="fas fa-eye"></i>}
+                        </span>
+                    </div>
                 </div>
                 <button type="submit">Login</button>
             </form>

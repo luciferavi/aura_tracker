@@ -1,60 +1,80 @@
-/* src/Home.css */
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
 
 body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #aebccb, #6d83f2);
-    color: #a43e3e;
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
     display: flex;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
-    margin: 0;
+    
+    justify-content: center;
+    min-height: 100vh;
+    color: #ffffff;
 }
 
+/* Container Styling */
 .container {
     text-align: center;
-    padding: 2rem;
-    max-width: 600px;
-    color: rgb(201, 162, 104);
-    background-color: rgba(144, 83, 123, 0.1);
-    border-radius: 10px;
-    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.2);
+    background: rgba(255, 255, 255, 0.15);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    width: 100%;
+    color: #ffffff;
 }
 
-h1 {
+.container h1 {
     font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: #c67171;
+    margin-bottom: 10px;
+    color: #f36060;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
 
-p {
+.container p {
     font-size: 1.2rem;
-    margin-bottom: 2rem;
-    color: #a95e5e;
-    background-color: rgb(238, 192, 136);
+    margin-bottom: 20px;
+    color: #f36060;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
 }
 
-button {
-    background-color: #d74f1d;
-    color: #d65757;
-    font-size: 1rem;
-    padding: 0.8rem 1.2rem;
-    margin: 0.5rem;
+/* Button Styling */
+.container button {
+    background: #ff7e5f;
+    color: #ffffff;
     border: none;
-    border-radius: 5px;
+    padding: 10px 20px;
+    margin: 10px;
+    font-size: 1rem;
+    border-radius: 8px;
     cursor: pointer;
-    transition: transform 0.3s, background-color 0.3s;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
-button:hover {
-    background-color: #ff5733;
+.container button:hover {
+    background: #feb47b;
     transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 
-button:focus {
-    outline: none;
-}
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container h1 {
+        font-size: 2rem;
+    }
 
-a {
-    text-decoration: none;
+    .container p {
+        font-size: 1rem;
+    }
+
+    .container button {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
 }

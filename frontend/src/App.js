@@ -7,8 +7,8 @@ import Signup from './Signup';
 import Arena from './arena';
 //import Timetable from './timetable';
 import Dashboard from './components/Dashboard/Dashboard';
-import CourseList from './components/Courses/CourseList';
-import CourseDetail from './components/Courses/CourseDetail';
+import CourseForm from './components/Courses/CourseForm';
+import CoursesPage from './components/Courses/CoursePage';
 import Profile from './components/Profile/Profile';
 import RewardsPage from './components/Achievements/rewards';
 import PrivateRoute from './components/common/PrivateRoute';
@@ -17,7 +17,8 @@ import Timetable from './timetable';
 import Calendar from './components/Calender';
 import TaskManager from './components/tasks';
 function App() {
- 
+ //                <Route path="/courses" element={<PrivateRoute element={<CourseForm/>} />} />
+
 
     return (
 <AuthProvider>
@@ -30,8 +31,7 @@ function App() {
                 <Route path="/arena" element={<Arena />} />
                 <Route path="/Calender" element={<PrivateRoute element ={<Calendar />}/>} />
                 <Route path="/dashboard" element={<PrivateRoute component={Dashboard} />} />
-                <Route path="/courses" element={<PrivateRoute component={CourseList} />} />
-                <Route path="/courses/:id" element={<PrivateRoute component={CourseDetail} />} />
+                <Route path="/courses" element={<PrivateRoute element={<CoursesPage/>} />} />
                 <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
                 <Route path="/rewards" element={<RewardsPage />} />
                 <Route path="/tasks" element={<PrivateRoute element={<TaskManager />}/>} />

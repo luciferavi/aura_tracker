@@ -1,11 +1,16 @@
-// models/Course.js
+// backend/models/Course.js
 const mongoose = require('mongoose');
 
-const courseSchema = new mongoose.Schema({
-    name: String,
-    schedule: String,
-    assignments: [String],
-    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+const AssignmentSchema = new mongoose.Schema({
+  title: String,
+  deadline: Date,
+  completed: { type: Boolean, default: false },
 });
 
-module.exports = mongoose.model('Course', courseSchema);
+const CourseSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  description: String,
+  assignments: [AssignmentSchema], // Embedded array of assignments
+});
+
+module.exports = mongoose.model('Course', CourseSchema);

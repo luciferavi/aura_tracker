@@ -26,6 +26,24 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 
+// In your backend (e.g., routes/auth.js)
+router.post('/google-signup', async (req, res) => {
+    const { name, email } = req.body;
+
+    try {
+        // Check if user already exists
+        let user = await User.findOne({ email });
+        if (!user) {
+            // Create a new user
+            user = new User({ name, email });
+            await user.save();
+        }
+
+        res.status(200).json({ message: 'Google signup successful', user });
+    } catch (error) {
+        res.status(500).json({ message: 'Error during Google signup' });
+    }
+});
 
 
 router.post('/google-login', async (req, res) => {

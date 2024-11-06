@@ -32,11 +32,14 @@ function Login() {
 
            // Optional: Send the user’s Google token to your backend if needed
            const token = await user.getIdToken();
+           console.log('Firebase ID Token:', token); // Check if token is correctly retrieved
+
            const response = await axios.post('http://localhost:8000/api/google-login', { token });
 
            localStorage.setItem('token', response.data.token); // Save token in local storage
            alert('Google login successful!');
            //navigate('/arena'); // Redirect to arena or other authenticated page
+           navigate('/arena');
        } catch (error) {
            console.error('Google login error:', error);
            setError('Google login failed. Please try again.');

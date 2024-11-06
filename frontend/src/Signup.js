@@ -3,9 +3,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Signup.css';
 import axios from 'axios';
 import { useAuth } from './context/AuthContext';
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 function Signup() {
-    const { login } = useAuth(); // Using login from useAuth to log in after signup
+    const { login } = useAuth();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -17,15 +18,33 @@ function Signup() {
         setError('');
 
         try {
-            // API request to register the user
             const response = await axios.post('http://localhost:8000/api/signup', { name, email, password });
             alert('Signup successful!');
-            
-            // Log in the user after signup
-            //await login(email, password);
-            navigate('/arena'); // Redirect to arena page
+            navigate('/arena');
         } catch (error) {
             setError(error.response?.data?.message || 'Error creating account');
+        }
+    };
+
+    // Function for Google Signup
+    const handleGoogleSignup = async () => {
+        const auth = getAuth();
+        const provider = new GoogleAuthProvider();
+
+        try {
+            const result = await signInWithPopup(auth, provider);
+            const user = result.user;
+
+            // Send user data to the backend if needed
+            await axios.post('http://localhost:8000/api/google-signup', {
+                name: user.displayName,
+                email: user.email,
+            });
+
+            alert('Google Signup successful!');
+            navigate('/arena');
+        } catch (error) {
+            setError('Google Signup failed. Please try again.');
         }
     };
 
@@ -63,6 +82,9 @@ function Signup() {
                 </div>
                 <button type="submit">Sign Up</button>
             </form>
+            <button onClick={handleGoogleSignup} className="google-signup-btn">
+                Sign Up with Google
+            </button>
             <p>
                 Already have an account? <Link to="/login">Login</Link>
             </p>

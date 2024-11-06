@@ -7,7 +7,8 @@ const authRoutes = require('./routes/auth'); // Adjust the import path if needed
 const profileRoutes=require('./routes/profile');
 const timetableRoutes = require('./routes/timetable'); // Import the timetable route
 const taskRoutes = require('./routes/tasks');
-const passport = require('passport');
+const session = require('express-session');
+ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const cookieSession = require('cookie-session');
 //const admin=require('firebase-admin');
@@ -43,7 +44,12 @@ app.use('/api', authRoutes);//carefull
    //   maxAge: 24 * 60 * 60 * 1000, // 1 day
    // })
  // );
-  
+ app.use(session({
+  secret: process.env.SESSION_SECRET, // replace with a strong secret in production
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true } // Use `true` if your app is served over HTTPS
+}));
   // Initialize passport
   app.use(passport.initialize());
   app.use(passport.session());
@@ -64,8 +70,8 @@ app.use('/api', authRoutes);//carefull
   ////);
   
   // Serialize and deserialize user
- // passport.serializeUser((user, done) => done(null, user));
- // passport.deserializeUser((user, done) => done(null, user));
+  passport.serializeUser((user, done) => done(null, user));
+  passport.deserializeUser((user, done) => done(null, user));
   
   // Route to initiate Google login
  // app.get(

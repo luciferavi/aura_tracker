@@ -1,4 +1,3 @@
-// frontend/src/components/CoursesPage.js
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -41,7 +40,7 @@ const CoursesPage = () => {
   const fetchCourses = async () => {
     try {
       const response = await axios.get('http://localhost:8000/api/courses');
-      setCourses(response.data);
+      setCourses(response.data); // Assign fetched courses to state
     } catch (error) {
       console.error('Error fetching courses:', error);
     }
@@ -51,7 +50,7 @@ const CoursesPage = () => {
   const addCourse = async (courseData) => {
     try {
       const response = await axios.post('http://localhost:8000/api/courses/add', courseData);
-      setCourses([...courses, response.data]);
+      setCourses([...courses, response.data]); // Update state with new course
     } catch (error) {
       console.error('Error adding course:', error);
     }
@@ -90,7 +89,7 @@ const CoursesPage = () => {
           <h2>{course.name}</h2>
           <p>{course.description}</p>
           <h3>Assignments</h3>
-          {course.assignments.map(assignment => (
+          {course.assignments?.map(assignment => (
             <div key={assignment._id}>
               <span>{assignment.title} - Due: {new Date(assignment.deadline).toLocaleDateString()}</span>
               <input

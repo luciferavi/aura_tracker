@@ -6,7 +6,9 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
     goals: {type:String},
 
-    photo: { type: String }
+    photo: { type: String },
+    batchYear: { type: String },  // New field for Batch Year
+    branch: { type: String }  
 });
 const User = mongoose.model('User', userSchema);
 

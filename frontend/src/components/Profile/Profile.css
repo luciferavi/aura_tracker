@@ -1,15 +1,86 @@
-/* Profile.css */
+/* Profile Page Styles */
 .profile-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 30px;
+  font-family: 'Arial', sans-serif;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Heading Styles */
+.profile-container h1 {
   text-align: center;
-  padding: 20px;
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+/* Profile Overview Section */
+.profile-overview {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.profile-photo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
 }
 
 .profile-photo {
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #007bff;
+  margin-bottom: 15px;
 }
 
-.user-info {
-  margin-bottom: 20px;
+.update-photo-container,
+.upload-photo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.upload-photo-container input[type="file"],
+.update-photo-container input[type="file"] {
+  margin-bottom: 15px;
+}
+
+button {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 20px;
+}
+
+.user-details h2 {
+  font-size: 2rem;
+  color: #007bff;
+  margin-bottom: 10px;
+}
+
+.user-details p {
+  font-size: 1.1rem;
+  color: #666;
 }

@@ -184,5 +184,58 @@ router.get('/timetable', async (req, res) => {
 });
 
 
+
+
+
+router.patch('/update-batch-year', async (req, res) => {
+    const { batchYear } = req.body;
+    const userId = req.userId; // Assuming you're using JWT to authenticate and get userId
+
+    if (!batchYear) {
+        return res.status(400).send({ message: 'Batch Year is required' });
+    }
+
+    try {
+        const user = await User.findByIdAndUpdate(
+            userId,
+            { batchYear }, // Update the batchYear field
+            { new: true }
+        );
+        if (!user) {
+            return res.status(404).send({ message: 'User not found' });
+        }
+        res.status(200).send({ message: 'Batch Year updated successfully', user });
+    } catch (err) {
+        console.error('Error updating batch year:', err);
+        res.status(500).send({ message: 'Error updating Batch Year' });
+    }
+});
+
+// Update Branch
+router.patch('/update-branch', async (req, res) => {
+    const { branch } = req.body;
+    const userId = req.userId;
+
+    if (!branch) {
+        return res.status(400).send({ message: 'Branch is required' });
+    }
+
+    try {
+        const user = await User.findByIdAndUpdate(
+            userId,
+            { branch }, // Update the branch field
+            { new: true }
+        );
+        if (!user) {
+            return res.status(404).send({ message: 'User not found' });
+        }
+        res.status(200).send({ message: 'Branch updated successfully', user });
+    } catch (err) {
+        console.error('Error updating branch:', err);
+        res.status(500).send({ message: 'Error updating Branch' });
+    }
+});
+
+
 //module.exports=upload;
 module.exports = router;

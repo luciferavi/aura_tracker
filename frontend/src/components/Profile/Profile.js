@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './Profile.css'; // Importing the CSS file for styling
 
 const Profile = () => {
     const [user, setUser] = useState(null);
@@ -57,21 +58,49 @@ const Profile = () => {
     if (error) return <div>{error}</div>;
 
     return (
-        <div>
-            <h1>User Profile</h1>
-            {user && (
-                <div>
-                    <img src={`http://localhost:8000/${photoPath}`} alt="Profile" style={{ maxWidth: '300px', maxHeight: '300px' }} />
+        <div className="profile-container">
+            <h1>Student Profile</h1>
+
+            {/* Profile Overview */}
+            <div className="profile-overview">
+                <div className="profile-photo-container">
+                    <img
+                        src={photoPath ? `http://localhost:8000/${photoPath}` : 'default-avatar.jpg'}
+                        alt="Profile"
+                        className="profile-photo"
+                    />
+                    {photoPath ? (
+                        <div className="update-photo-container">
+                            <h3>Update Profile Photo</h3>
+                            <form onSubmit={handleUpload}>
+                                <input
+                                    type="file"
+                                    onChange={handleFileChange}
+                                    accept="image/*"
+                                />
+                                <button type="submit">Update</button>
+                            </form>
+                        </div>
+                    ) : (
+                        <div className="upload-photo-container">
+                            <h3>Upload Profile Photo</h3>
+                            <form onSubmit={handleUpload}>
+                                <input
+                                    type="file"
+                                    onChange={handleFileChange}
+                                    accept="image/*"
+                                    required
+                                />
+                                <button type="submit">Upload</button>
+                            </form>
+                        </div>
+                    )}
+                </div>
+                <div className="user-details">
                     <h2>{user.name}</h2>
                     <p>Email: {user.email}</p>
-                    {/* Display additional user info */}
                 </div>
-            )}
-            <form onSubmit={handleUpload}>
-                <label>Upload your photo:</label>
-                <input type="file" onChange={handleFileChange} />
-                <button type="submit">Upload</button>
-            </form>
+            </div>
         </div>
     );
 };

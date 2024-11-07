@@ -36,6 +36,7 @@ const Navbar = () => {
                     <li><Link to="/leaderboards">Leaderboards</Link></li>
                     <li><Link to="/calendar">Calendar</Link></li>
                     <li><Link to="/tasks">Tasks</Link></li>
+                    <li><Link to="/CompletedAssignmentPage">completed Assignments</Link></li>
                     <li><a href="/" onClick={handleLogout}>Logout</a></li>
                 </ul>
             </div>

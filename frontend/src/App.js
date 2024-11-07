@@ -14,6 +14,7 @@ import CoursesPage from './components/Courses/CoursePage';
 import Profile from './components/Profile/Profile';
 import RewardsPage from './components/Achievements/rewards';
 import PrivateRoute from './components/common/PrivateRoute';
+import CompletedAssignmentsPage from './components/Courses/CourseForm';
 import { AuthProvider } from './context/AuthContext';
 import Timetable from './timetable';
 import Calendar from './components/Calender';
@@ -37,6 +38,7 @@ function App() {
                 <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
                 <Route path="/rewards" element={<RewardsPage />} />
                 <Route path="/tasks" element={<PrivateRoute element={<TaskManager />}/>} />
+                <Route path="/CompletedAssignmentPage" element={<CompletedAssignmentsPage/>}/>
 
             </Routes>
         </Router>

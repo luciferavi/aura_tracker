@@ -34,7 +34,7 @@ function Login() {
             const token = await user.getIdToken();
             console.log('Firebase ID Token:', token);
 
-            const response = await axios.post('http://localhost:8000/api/google-login', { token });
+            const response = await axios.post('http://localhost:8000/api/google-signup', { token });
 
             localStorage.setItem('token', response.data.token); // Save token in local storage
             alert('Google login successful!');

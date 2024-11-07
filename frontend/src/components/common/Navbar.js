@@ -31,12 +31,8 @@ const Navbar = () => {
                 <ul className="sidebar-list">
                     <li><Link to="/profile">Profile</Link></li>
                     <li><Link to="/courses">Courses</Link></li>
-                    <li><Link to="/rewards">Rewards</Link></li>
                     <li><Link to="/challenges">Challenges</Link></li>
                     <li><Link to="/leaderboards">Leaderboards</Link></li>
-                    <li><Link to="/calendar">Calendar</Link></li>
-                    <li><Link to="/tasks">Tasks</Link></li>
-                    <li><Link to="/CompletedAssignmentPage">completed Assignments</Link></li>
                     <li><a href="/" onClick={handleLogout}>Logout</a></li>
                 </ul>
             </div>

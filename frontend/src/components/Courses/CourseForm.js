@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import CompletedAssignmentsPage from './CompletedAssignmentPage';
+import RewardsPage from '../Achievements/rewards';
 
 const CoursesPage = () => {
   const [courses, setCourses] = useState([]);
@@ -8,6 +9,7 @@ const CoursesPage = () => {
   const [loading, setLoading] = useState(false);
   const [courseName, setCourseName] = useState('');
   const [courseDescription, setCourseDescription] = useState('');
+  const [points, setPoints] = useState(120); // Initialize points here
 
   // Fetch courses from the backend
   const fetchCourses = useCallback(async () => {
@@ -81,6 +83,9 @@ const CoursesPage = () => {
               : course
           )
         );
+
+        // Increase points by 10 for completed assignment
+        setPoints(prevPoints => prevPoints + 10);
       }
     } catch (error) {
       console.error('Error updating assignment status:', error);
@@ -162,6 +167,9 @@ const CoursesPage = () => {
 
       {/* Render CompletedAssignmentsPage with completed assignments */}
       <CompletedAssignmentsPage completedAssignments={completedAssignments} />
+
+      {/* Pass points to RewardsPage */}
+      <RewardsPage points={points} />
     </div>
   );
 };

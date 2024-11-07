@@ -1,8 +1,7 @@
 import React from 'react';
 import './rewards.css';
 
-const RewardsPage = () => {
-    const points = 120; // Replace with actual points from user data
+const RewardsPage = ({ points }) => {
     const rewards = [
         { id: 1, name: 'Free Coffee', cost: 100 },
         { id: 2, name: 'Discount Voucher', cost: 200 },

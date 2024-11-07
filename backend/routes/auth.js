@@ -235,6 +235,29 @@ router.patch('/update-branch', async (req, res) => {
         res.status(500).send({ message: 'Error updating Branch' });
     }
 });
+router.patch('/courses/:courseId/assignment/:assignmentId/complete', async (req, res) => {
+    try {
+      const { courseId, assignmentId } = req.params;
+      const { completed } = req.body;
+  
+      // Find the course and assignment
+      const course = await Course.findById(courseId);
+      const assignment = course.assignments.id(assignmentId);
+      
+      // Update assignment completion status
+      assignment.completed = completed;
+      if (completed) {
+        assignment.completedDate = new Date();
+      } else {
+        assignment.completedDate = null;
+      }
+  
+      await course.save();
+      res.json(course);
+    } catch (error) {
+      res.status(500).json({ error: 'Failed to update assignment status' });
+    }
+  });
 
 
 //module.exports=upload;

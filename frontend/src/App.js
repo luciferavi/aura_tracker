@@ -10,24 +10,35 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 //import Timetable from './timetable';
 import Dashboard from './components/Dashboard/Dashboard';
 import CourseForm from './components/Courses/CourseForm';
-import CoursesPage from './components/Courses/CoursePage';
+import CoursesPage from './components/Courses/CourseForm';
 import Profile from './components/Profile/Profile';
 import RewardsPage from './components/Achievements/rewards';
 import PrivateRoute from './components/common/PrivateRoute';
-import CompletedAssignmentsPage from './components/Courses/CourseForm';
+import CompletedAssignmentsPage from './components/Courses/CompletedAssignmentPage';
 import { AuthProvider } from './context/AuthContext';
 import Timetable from './timetable';
 import Calendar from './components/Calender';
 import TaskManager from './components/tasks';
 function App() {
  //                <Route path="/courses" element={<PrivateRoute element={<CourseForm/>} />} />
+ const [completedAssignments, setCompletedAssignments] = useState([]);
 
-
+ const handleCompleteAssignment = (completedAssignment) => {
+    setCompletedAssignments((prev) => [...prev, completedAssignment]);
+  };
     return (
 <AuthProvider>
         <Router>
         
             <Routes>
+            <Route 
+          path="/courses" 
+          element={<CoursesPage onCompleteAssignment={handleCompleteAssignment} />} 
+        />
+        <Route 
+          path="/completed-assignments" 
+          element={<CompletedAssignmentsPage completedAssignments={completedAssignments} />} 
+        />
                 <Route path="/" element={<Home />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
@@ -38,7 +49,7 @@ function App() {
                 <Route path="/profile" element={<PrivateRoute element={<Profile />} />} />
                 <Route path="/rewards" element={<RewardsPage />} />
                 <Route path="/tasks" element={<PrivateRoute element={<TaskManager />}/>} />
-                <Route path="/CompletedAssignmentPage" element={<CompletedAssignmentsPage/>}/>
+                <Route path="/CompletedAssignmentPage" element={<PrivateRoute element={<CompletedAssignmentsPage/>}/>}/>
 
             </Routes>
         </Router>

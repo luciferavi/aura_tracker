@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     goals: {type:String},
+    points: { type: Number, default: 0 },  // Add points field
 
     photo: { type: String },
     batchYear: { type: String },  // New field for Batch Year

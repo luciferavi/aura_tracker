@@ -10,7 +10,7 @@ const authenticateToken = require('../middleware/authMiddleware'); // Import the
 const Timetable=require('../models/Timetable');
 const { OAuth2Client } = require('google-auth-library');
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID); // Make sure this is defined in your .env file
-
+const Course=require('../models/Course');
 
 
 // Define the storage configuration for multer
@@ -268,6 +268,62 @@ router.patch('/courses/:courseId/assignment/:assignmentId/complete', async (req,
     }
 });
   
+
+
+
+
+router.get('/courses', async (req, res) => {
+    const { userId } = req.query;
+    try {
+      const courses = await Course.find({ userId });
+      res.json(courses);
+    } catch (error) {
+      res.status(500).json({ error: 'Error fetching courses' });
+    }
+  });
+  
+  // Add a course for a specific user
+  router.post('/courses/add', async (req, res) => {
+    const { name, description, userId } = req.body;
+
+    // Simple validation check
+    if (!name || !description || !userId) {
+        return res.status(400).json({ error: 'Missing required fields: name, description, or userId.' });
+    }
+
+    try {
+        const course = new Course({ name, description, userId });
+        await course.save();
+        res.json(course);
+    } catch (error) {
+        console.error('Error adding course:', error);
+        res.status(500).json({ error: 'Error adding course.' });
+    }
+});
+
+
+  
+
+
+// Fetch points for a user
+router.get('/api/points/:userId', async (req, res) => {
+    const user = await User.findById(req.params.userId);
+    res.json({ points: user.points });
+});
+
+// Redeem reward
+router.post('/api/redeem', async (req, res) => {
+    const { userId, cost } = req.body;
+    const user = await User.findById(userId);
+    if (user.points >= cost) {
+        user.points -= cost;
+        await user.save();
+        res.json({ updatedPoints: user.points });
+    } else {
+        res.status(400).send('Not enough points');
+    }
+});
+
 
 
 //module.exports=upload;

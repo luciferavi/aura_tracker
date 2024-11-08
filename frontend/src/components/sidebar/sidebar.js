@@ -17,7 +17,7 @@ const Sidebar = () => {
                         <li><a href="/profile">Profile</a></li>
                         <li><a href="/courses">Courses</a></li>
                         <li><a href="/rewards">Rewards</a></li>
-                        <li><a href="/challenges">Challenges</a></li>
+                        <li><a href="/Challenges">Challenges</a></li>
                         <li><a href="/leaderboards">Leaderboards</a></li>
                         <li><a href="/timetable">Timetable</a></li>
                     </ul>

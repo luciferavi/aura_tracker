@@ -259,6 +259,16 @@ router.patch('/courses/:courseId/assignment/:assignmentId/complete', async (req,
     }
   });
 
+  router.get('/leaderboard', async (req, res) => {
+    try {
+        const leaderboard = await User.find({}).sort({ coins: -1 }).select('name coins');
+        res.json(leaderboard);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch leaderboard' });
+    }
+});
+  
+
 
 //module.exports=upload;
 module.exports = router;

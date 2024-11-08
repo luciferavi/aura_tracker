@@ -32,7 +32,7 @@ const Navbar = () => {
                     <li><Link to="/profile">Profile</Link></li>
                     <li><Link to="/courses">Courses</Link></li>
                     <li><Link to="/challenges">Challenges</Link></li>
-                    <li><Link to="/leaderboards">Leaderboards</Link></li>
+                    <li><Link to="/leaderboards">Leaderboard</Link></li>
                     <li><a href="/" onClick={handleLogout}>Logout</a></li>
                 </ul>
             </div>

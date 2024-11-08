@@ -12,9 +12,8 @@ const CoursesPage = () => {
   const [courseDescription, setCourseDescription] = useState('');
   const [points, setPoints] = useState(0);
   const [activeTab, setActiveTab] = useState('courses');
-  const userId = localStorage.getItem('userId');  // If stored in localStorage
+  const userId = localStorage.getItem('userId');  // Assuming stored in localStorage
 
-  // Helper function to get points key based on user ID
   const getPointsKey = (userId) => `points_${userId}`;
 
   const fetchCourses = useCallback(async () => {
@@ -38,14 +37,12 @@ const CoursesPage = () => {
   useEffect(() => {
     fetchCourses();
 
-    // Load points from local storage on component mount
     const savedPoints = localStorage.getItem(getPointsKey(userId));
     if (savedPoints) {
       setPoints(parseInt(savedPoints, 10));
     }
   }, [fetchCourses, userId]);
 
-  // Update points and save to local storage when points change
   const updatePoints = (newPoints) => {
     setPoints(newPoints);
     localStorage.setItem(getPointsKey(userId), newPoints.toString());
@@ -63,6 +60,15 @@ const CoursesPage = () => {
       setCourseDescription('');
     } catch (error) {
       console.error('Error adding course:', error);
+    }
+  };
+
+  const deleteCourse = async (courseId) => {
+    try {
+      await axios.delete(`http://localhost:8000/api/courses/${courseId}`);
+      setCourses(courses.filter(course => course._id !== courseId));
+    } catch (error) {
+      console.error('Error deleting course:', error);
     }
   };
 
@@ -144,9 +150,10 @@ const CoursesPage = () => {
 
             {courses.length > 0 ? (
               courses.map(course => (
-                <div key={course._id}>
+                <div key={course._id} className="course-item">
                   <h3>{course.name}</h3>
                   <p>{course.description}</p>
+                  <button onClick={() => deleteCourse(course._id)}>Delete Course</button>
                   <h4>Assignments</h4>
 
                   <table>

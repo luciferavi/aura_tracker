@@ -22,6 +22,7 @@ app.use('/api/courses', courseRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/achievements', require('./routes/achievement'));
 app.use('/api/timetable', timetableRoutes); // Add the timetable route
+
 app.use('/api', authRoutes); // Authentication routes
 
 // Set up session middleware

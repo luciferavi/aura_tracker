@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import './Leaderboard.css'; // Import your CSS file
+
 const Leaderboard = () => {
   const [leaderboard, setLeaderboard] = useState([]);
   const [error, setError] = useState(null);
@@ -19,7 +21,7 @@ const Leaderboard = () => {
   }, []);
 
   return (
-    <div>
+    <div className="leaderboard">
       <h2>Leaderboard</h2>
       {error ? (
         <p>{error}</p>

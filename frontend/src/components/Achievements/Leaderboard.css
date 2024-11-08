@@ -1,0 +1,65 @@
+/* Leaderboard.css */
+
+/* Leaderboard container styling */
+.leaderboard {
+    background-color: #f4eeee;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 100vh;
+    text-align: center;
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+    max-height: 100vh;
+    padding-right: 20px;
+  }
+  
+  /* Title styling */
+  .leaderboard h2 {
+    font-size: 2.5em;
+    color: #4a90e2;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  /* Error message styling */
+  .leaderboard p {
+    color: #e74c3c;
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-top: 20px;
+  }
+  
+  /* List styling */
+  .leaderboard ul {
+    padding: 0;
+    list-style-type: none;
+    margin: 0;
+    max-height: calc(80vh - 60px); /* Adjust height to make space for the title */
+    overflow-y: auto; /* Allow list to scroll */
+  }
+  
+  /* Individual leaderboard item styling */
+  .leaderboard li {
+    background-color: #5dd36f;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px 0;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+  
+  /* Hover effect on list items */
+  .leaderboard li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    background-color: #4f64cd;
+  }
+  

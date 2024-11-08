@@ -1,17 +1,24 @@
-# Node modules
+# Ignore node_modules
 node_modules/
 
-# Logs
-logs
+# Ignore build or dist directories (if applicable)
+build/
+dist/
+
+# Ignore log files
 *.log
 
-# Environment variables
-
-
-# Build directories
-dist/
-build/
-
-# Other temporary files
+# Ignore OS-specific files
 .DS_Store
 Thumbs.db
+
+# Ignore .env files containing sensitive information
+
+
+# Ignore IDE/editor-specific files (e.g., VS Code, IntelliJ, etc.)
+.vscode/
+.idea/
+
+# Ignore other temporary files or output from tools
+*.tmp
+*.bak

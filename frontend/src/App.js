@@ -6,11 +6,8 @@ import Login from './Login';
 import Signup from './Signup';
 import Arena from './arena';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-<<<<<<< HEAD
 import Leaderboard from './components/Achievements/Leaderboard';
-=======
 import Challenges from './components/challenges/Challenges';
->>>>>>> 8dc857d6c71e29b63732dae1536fa9f056e570f6
 //import Timetable from './timetable';
 import Dashboard from './components/Dashboard/Dashboard';
 import CourseForm from './components/Courses/CourseForm';
@@ -47,12 +44,9 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/arena" element={<Arena />} />
-<<<<<<< HEAD
                 <Route path="/leaderboards" element={<PrivateRoute element={<Leaderboard/>}/>}/>
-=======
                 <Route path="/Challenges" element={<PrivateRoute element ={<Challenges />}/>} />
 
->>>>>>> 8dc857d6c71e29b63732dae1536fa9f056e570f6
                 <Route path="/Calender" element={<PrivateRoute element ={<Calendar />}/>} />
                 <Route path="/dashboard" element={<PrivateRoute component={Dashboard} />} />
                 <Route path="/courses" element={<PrivateRoute element={<CoursesPage/>} />} />

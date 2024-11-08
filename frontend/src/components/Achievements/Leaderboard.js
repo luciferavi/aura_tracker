@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './Leaderboard.css'
 const Leaderboard = () => {
   const [leaderboard, setLeaderboard] = useState([]);
   const [error, setError] = useState(null);

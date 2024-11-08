@@ -1,0 +1,122 @@
+/* Main container styling */
+.challenges-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background: linear-gradient(to right, #f0f4f8, #d9e4f5);
+    min-height: 100vh;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Page header styling */
+  .challenges-header {
+    font-size: 28px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px #e1e8ed;
+  }
+  
+  /* Challenge card styling */
+  .challenge-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+    margin: 15px 0;
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .challenge-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 24px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Decorative corner ribbon */
+  .challenge-ribbon {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    background: #3498db;
+    color: #fff;
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 0 0 8px 8px;
+    font-size: 12px;
+  }
+  
+  /* Challenge name styling */
+  .challenge-name {
+    font-size: 20px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 10px;
+    text-align: center;
+  }
+  
+  /* Challenge status styling */
+  .challenge-status {
+    font-size: 16px;
+    font-weight: 500;
+    color: #888;
+    margin-bottom: 20px;
+  }
+  
+  /* Button styling */
+  .status-button {
+    padding: 10px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .status-incomplete {
+    background-color: #e74c3c;
+    color: #fff;
+  }
+  
+  .status-incomplete:hover {
+    background-color: #c0392b;
+  }
+  
+  .status-complete {
+    background-color: #2ecc71;
+    color: #fff;
+  }
+  
+  .status-complete:hover {
+    background-color: #27ae60;
+  }
+  
+  /* Icon for each challenge card */
+  .challenge-icon {
+    font-size: 24px;
+    color: #3498db;
+    margin-bottom: 10px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 600px) {
+    .challenge-item {
+      padding: 15px;
+    }
+  
+    .status-button {
+      font-size: 14px;
+      padding: 8px 16px;
+    }
+  }
+  

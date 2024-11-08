@@ -1,3 +1,6 @@
+.courses-page{
+  max-width: 100%;
+}
 .courses-page {
   display: flex;
   flex-direction: column;
@@ -11,6 +14,7 @@
   background-color: #333;
   color: white;
   padding: 10px;
+  max-width: 1000px;
 }
 
 .navbar button {

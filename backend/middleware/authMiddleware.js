@@ -39,4 +39,29 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
-module.exports = authenticateToken;
+// module.exports = authenticateToken;
+
+// const jwt = require('jsonwebtoken');
+
+// const authenticateToken = (req, res, next) => {
+//     const token = req.header('Authorization')?.replace('Bearer ', ''); // Extract token from the Authorization header
+
+//     if (!token) {
+//         return res.status(403).json({ message: 'Access denied. No token provided.' });
+//     }
+
+//     try {
+//         // Verify token using the secret key
+//         const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        
+//         // Attach the userId to the request object
+//         req.user = { userId: decoded.userId }; // Ensure the userId is attached to req.user
+
+//         next(); // Proceed to the next middleware or route handler
+//     } catch (error) {
+//         console.error('Error verifying token:', error);
+//         res.status(401).json({ message: 'Invalid token' });
+//     }
+// };
+
+// module.exports = authenticateToken;

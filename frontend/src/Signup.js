@@ -18,7 +18,11 @@ function Signup() {
 
         try {
             const response = await axios.post('http://localhost:8000/api/signup', { name, email, password });
+
             alert('Signup successful!');
+            localStorage.setItem('token', response.data.token); // Save token in local storage
+            localStorage.setItem('userId', userIdFromResponse);
+
             navigate('/arena');
         } catch (error) {
             setError(error.response?.data?.message || 'Error creating account');

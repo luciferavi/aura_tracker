@@ -35,25 +35,32 @@ const CoursesPage = () => {
   }, [loading]);
 
   useEffect(() => {
-    fetchCourses();
-
-    const savedPoints = localStorage.getItem(getPointsKey(userId));
-    if (savedPoints) {
-      setPoints(parseInt(savedPoints, 10));
-    }
+    if (userId) {
+      fetchCourses();
+  
+      const savedPoints = localStorage.getItem(getPointsKey(userId));
+      if (savedPoints) {
+        setPoints(parseInt(savedPoints, 10));
+      }
+    } else {
+      console.warn("User ID is null; skipping course fetch.");}
   }, [fetchCourses, userId]);
 
   const updatePoints = (newPoints) => {
     setPoints(newPoints);
     localStorage.setItem(getPointsKey(userId), newPoints.toString());
   };
+  console.log('userId:', userId); // Adding line to verify userId
+
 
   const addCourse = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/courses/add', {
+      const response = await axios.post('http://localhost:8000/api/courses', {
         name: courseName,
         description: courseDescription,
+        userId,
+        
       });
       setCourses([...courses, response.data]);
       setCourseName('');

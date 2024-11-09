@@ -11,7 +11,6 @@ const session = require('express-session');
 const passport = require('passport');
 const cookieSession = require('cookie-session');
 const courseRoutes = require('./routes/course');
-
 const app = express();
 
 app.use(cors());

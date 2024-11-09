@@ -23,7 +23,7 @@ exports.addCourse = async (req, res) => {
 exports.addAssignment = async (req, res) => {
   const { courseId } = req.params;
   const { title, deadline } = req.body;
-  const userId = req.userId; // Retrieve userId from authenticateToken middleware
+  const userId = req.user.userId; // Retrieve userId from authenticateToken middleware
 
   try {
       // Ensure the course exists and belongs to the authenticated user
@@ -48,7 +48,7 @@ exports.addAssignment = async (req, res) => {
 exports.updateAssignmentStatus = async (req, res) => {
   const { courseId, assignmentId } = req.params;
   const { completed } = req.body;
-  const userId = req.userId; // Get userId from authenticateToken middleware
+  const userId = req.user.userId; // Get userId from authenticateToken middleware
   const pointsToAdd = 10; // Points to add after completing an assignment
 
   try {

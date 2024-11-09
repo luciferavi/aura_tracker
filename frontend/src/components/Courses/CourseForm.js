@@ -12,17 +12,19 @@ const CoursesPage = () => {
   const [courseDescription, setCourseDescription] = useState('');
   const [points, setPoints] = useState(0);
   const [activeTab, setActiveTab] = useState('courses');
-  const userId = localStorage.getItem('userId');  // Assuming stored in localStorage
-
+const token =localStorage.getItem('token');
   const getPointsKey = (userId) => `points_${userId}`;
 
   const fetchCourses = useCallback(async () => {
     if (loading) return;
     setLoading(true);
     try {
-      const response = await axios.get('http://localhost:8000/api/courses');
+      const response = await axios.get('http://localhost:8000/api/courses', {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include token in headers
+        },
+      });
       setCourses(response.data);
-
       const completedAssignments = response.data
         .flatMap(course => course.assignments)
         .filter(assignment => assignment.completed);
@@ -32,36 +34,24 @@ const CoursesPage = () => {
     } finally {
       setLoading(false);
     }
-  }, [loading]);
+  }, [loading,token]);
 
   useEffect(() => {
-    if (userId) {
-      fetchCourses();
-  
-      const savedPoints = localStorage.getItem(getPointsKey(userId));
-      if (savedPoints) {
-        setPoints(parseInt(savedPoints, 10));
-      }
-    } else {
-      console.warn("User ID is null; skipping course fetch.");}
-  }, [fetchCourses, userId]);
-
-  const updatePoints = (newPoints) => {
-    setPoints(newPoints);
-    localStorage.setItem(getPointsKey(userId), newPoints.toString());
-  };
-  console.log('userId:', userId); // Adding line to verify userId
-
+    fetchCourses();
+  }, [fetchCourses]);
 
   const addCourse = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8000/api/courses', {
-        name: courseName,
-        description: courseDescription,
-        userId,
-        
-      });
+      const response = await axios.post(
+        'http://localhost:8000/api/courses',
+        { name: courseName, description: courseDescription },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include token in headers
+          },
+        }
+      );
       setCourses([...courses, response.data]);
       setCourseName('');
       setCourseDescription('');
@@ -72,7 +62,11 @@ const CoursesPage = () => {
 
   const deleteCourse = async (courseId) => {
     try {
-      await axios.delete(`http://localhost:8000/api/courses/${courseId}`);
+      await axios.delete(`http://localhost:8000/api/courses/${courseId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`, // Include token in headers
+        },
+      });
       setCourses(courses.filter(course => course._id !== courseId));
     } catch (error) {
       console.error('Error deleting course:', error);
@@ -81,36 +75,60 @@ const CoursesPage = () => {
 
   const addAssignment = async (courseId, assignmentData) => {
     try {
-      const response = await axios.post(`http://localhost:8000/api/courses/${courseId}/assignment`, assignmentData);
+      const response = await axios.post(
+        `http://localhost:8000/api/courses/${courseId}/assignment`,
+        assignmentData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`, // Include token in headers
+          },
+        }
+      );
       setCourses(courses.map(c => (c._id === courseId ? response.data : c)));
     } catch (error) {
-      console.error('Error adding assignment:', error);
+      console.error('Error adding assignment:', error.response?.data || error.message, error);
     }
   };
 
   const updateAssignmentStatus = async (courseId, assignmentId, completed) => {
     try {
-      const response = await axios.patch(`http://localhost:8000/api/courses/${courseId}/assignment/${assignmentId}`, { completed });
-      const updatedCourse = response.data;
-
-      setCourses(courses.map(c => (c._id === courseId ? updatedCourse : c)));
-
-      const completedAssignment = updatedCourse.assignments.find(a => a._id === assignmentId);
-      if (completed) {
-        setCompletedAssignments([...completedAssignments, completedAssignment]);
-        setCourses(prevCourses =>
-          prevCourses.map(course =>
-            course._id === courseId
-              ? { ...course, assignments: course.assignments.filter(a => a._id !== assignmentId) }
-              : course
-          )
+        const response = await axios.patch(
+            `http://localhost:8000/api/courses/${courseId}/assignment/${assignmentId}`,
+            { completed },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`, // Include token in headers
+                },
+            }
         );
-        updatePoints(points + 10); // Update points without resetting them
-      }
+
+        const updatedCourse = response.data.course; // Get updated course
+        const updatedPoints = response.data.updatedPoints; // Get updated points
+
+        // Update the course data in state
+        setCourses(courses.map(c => (c._id === courseId ? updatedCourse : c)));
+
+        // Update completed assignments list
+        const completedAssignment = updatedCourse.assignments.find(a => a._id === assignmentId);
+        if (completed) {
+            setCompletedAssignments([...completedAssignments, completedAssignment]);
+            setCourses(prevCourses =>
+                prevCourses.map(course =>
+                    course._id === courseId
+                        ? { ...course, assignments: course.assignments.filter(a => a._id !== assignmentId) }
+                        : course
+                )
+            );
+        }
+
+        // Update the points state with the new points
+        updatePoints(updatedPoints); // Update points with the response from the server
+
     } catch (error) {
-      console.error('Error updating assignment status:', error);
+        console.error('Error updating assignment status:', error.response?.data || error.message, error);
     }
-  };
+};
+
 
   return (
     <div className="courses-page">

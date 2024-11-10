@@ -12,6 +12,7 @@ const passport = require('passport');
 const cookieSession = require('cookie-session');
 const courseRoutes = require('./routes/course');
 const app = express();
+const pointsRoutes = require('./routes/points');
 
 app.use(cors());
 app.use(express.json());
@@ -21,6 +22,7 @@ app.use('/api/courses', courseRoutes);
 app.use('/api/profile', profileRoutes);
 app.use('/api/achievements', require('./routes/achievement'));
 app.use('/api/timetable', timetableRoutes); // Add the timetable route
+app.use('/api', pointsRoutes);
 
 app.use('/api', authRoutes); // Authentication routes
 

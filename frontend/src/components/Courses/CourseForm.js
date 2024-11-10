@@ -89,6 +89,10 @@ const token =localStorage.getItem('token');
       console.error('Error adding assignment:', error.response?.data || error.message, error);
     }
   };
+  const updatePoints = (newPoints) => {
+    setPoints(newPoints);  // Update points with the new value
+};
+
 
   const updateAssignmentStatus = async (courseId, assignmentId, completed) => {
     try {
@@ -102,9 +106,9 @@ const token =localStorage.getItem('token');
             }
         );
 
-        const updatedCourse = response.data.course; // Get updated course
+        const updatedCourse = response.user.data.course; // Get updated course
         const updatedPoints = response.data.updatedPoints; // Get updated points
-
+console.log(updatedCourse);
         // Update the course data in state
         setCourses(courses.map(c => (c._id === courseId ? updatedCourse : c)));
 

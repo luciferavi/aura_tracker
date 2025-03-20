@@ -15,19 +15,34 @@ function Signup() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
-
+    
         try {
+            console.log("Attempting signup...");
+    
             const response = await axios.post('http://localhost:8000/api/signup', { name, email, password });
-
+    
+            console.log("Signup Response:", response);
+    
+            // Extract token and userId
+            const token = response.data.token;
+            const userId = response.data.userId; // Ensure backend sends userId in response
+    
+            if (!token || !userId) {
+                throw new Error("Invalid signup response. Token or userId missing.");
+            }
+    
+            // Save to local storage
+            localStorage.setItem('token', token);
+            localStorage.setItem('userId', userId);
+    
             alert('Signup successful!');
-            localStorage.setItem('token', response.data.token); // Save token in local storage
-            localStorage.setItem('userId', userIdFromResponse);
-
             navigate('/arena');
         } catch (error) {
+            console.error("Signup Error:", error.response?.data || error.message);
             setError(error.response?.data?.message || 'Error creating account');
         }
     };
+    
 
     const handleGoogleSignup = async () => {
         const auth = getAuth();

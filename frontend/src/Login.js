@@ -5,6 +5,20 @@ import axios from 'axios';
 import { auth, provider } from '../src/firebase';
 import { signInWithPopup } from 'firebase/auth';
 
+// Set up Axios to include JWT token in headers for all future requests
+axios.interceptors.request.use((config) => {
+    const token = localStorage.getItem('token');
+    console.log("Attaching Token:", token); // Debugging
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+}, (error) => {
+    return Promise.reject(error);
+});
+
+  
+
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -15,30 +29,40 @@ function Login() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
-
+    
         try {
             const response = await axios.post('http://localhost:8000/api/login', { email, password });
-            localStorage.setItem('token', response.data.token); // Save token in local storage
-            localStorage.setItem('userId', response.data.userId); // Save userId
-
-            alert('Login successful!');
-            navigate('/arena'); // Redirect to user profile
+    
+            console.log("Received Token:", response.data.token); // Debugging step
+            console.log("User ID:", response.data.userId);
+    
+            if (response.data.token) {
+                localStorage.setItem('token', response.data.token); 
+                localStorage.setItem('userId', response.data.userId);
+                alert('Login successful!');
+                navigate('/arena');
+            } else {
+                setError("Token not received from backend");
+            }
         } catch (error) {
             setError('Invalid email or password');
         }
     };
+    
 
     const handleGoogleSignIn = async () => {
         try {
             const result = await signInWithPopup(auth, provider);
             const user = result.user;
 
-            const token = await user.getIdToken();
-            console.log('Firebase ID Token:', token);
+            // Send Firebase ID token to your backend to generate your own JWT
+            const firebaseToken = await user.getIdToken();
+            const response = await axios.post('http://localhost:8000/api/google-signup', { token: firebaseToken });
 
-            const response = await axios.post('http://localhost:8000/api/google-signup', { token });
+            // Save the token FROM YOUR BACKEND (not the Firebase token)
+            localStorage.setItem('token', response.data.token); 
+            localStorage.setItem('userId', response.data.userId);
 
-            localStorage.setItem('token', response.data.token); // Save token in local storage
             alert('Google login successful!');
             navigate('/arena');
         } catch (error) {
